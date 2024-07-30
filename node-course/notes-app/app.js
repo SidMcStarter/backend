@@ -25,14 +25,6 @@ yargs.command({
   },
 });
 
-yargs.command({
-  command: "test",
-  describe: "test command",
-  handler: () => {
-    console.log("testing a command");
-  },
-});
-
 // removing a note
 yargs.command({
   command: "remove",
@@ -54,7 +46,7 @@ yargs.command({
   command: "list",
   describe: "list all notes",
   handler: () => {
-    console.log("listing all notes");
+    notes.listNotes();
   },
 });
 

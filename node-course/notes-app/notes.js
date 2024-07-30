@@ -1,5 +1,6 @@
 const fs = require("fs");
 const chalk = require("chalk");
+const { title } = require("process");
 
 const getNotes = () => {
   return "Your Notes...";
@@ -8,9 +9,7 @@ const getNotes = () => {
 const addNote = (title, body) => {
   const notes = loadNotes();
 
-  const duplicateNotes = notes.filter((note) => {
-    return note.title === title;
-  });
+  const duplicateNotes = notes.filter((note) => note.title === title);
 
   if (duplicateNotes.length === 0) {
     notes.push({
@@ -43,10 +42,8 @@ const loadNotes = () => {
 const removeNote = (title) => {
   const notes = loadNotes();
 
-  const newNotes = notes.filter((note) => {
-    return note.title !== title;
-  });
-  if (notes.length == newNotes) {
+  const newNotes = notes.filter((note) => note.title !== title);
+  if (notes.length === newNotes.length) {
     console.log(chalk.bgRed("No Note Removed"));
   } else {
     console.log(chalk.bgGreen("Note Removed"));
@@ -54,8 +51,17 @@ const removeNote = (title) => {
   }
 };
 
+const listNotes = () => {
+  const notes = loadNotes();
+
+  notes.forEach((note) => {
+    console.log(note.title);
+  });
+};
+
 module.exports = {
   getNotes: getNotes,
   addNote: addNote,
   removeNote: removeNote,
+  listNotes: listNotes,
 };
